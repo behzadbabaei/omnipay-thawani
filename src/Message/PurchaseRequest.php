@@ -137,6 +137,28 @@ class PurchaseRequest extends AbstractRequest
     }
 
     /**
+     * Set the request metadata.
+     *
+     * @param array $value
+     *
+     * @return $this
+     */
+    public function setMetadata(array $value)
+    {
+        return $this->setParameter('metadata', $value);
+    }
+
+    /**
+     * Get the request metadata.
+     *
+     * @return mixed
+     */
+    public function getMetadata()
+    {
+        return $this->getParameter('metadata', []);
+    }
+
+    /**
      * Get the request saveCardOnSuccess.
      *
      * @return mixed
@@ -163,23 +185,25 @@ class PurchaseRequest extends AbstractRequest
             'amount',
             'productName',
             'transactionId',
-            'customData'
+            'metadata'
         );
 
         return array_merge($this->getCustomData(), [
             'client_reference_id' => $this->getTransactionId(),
             'mode' => $this->getPaymentMode() ?? self::MODE_PAYMENT,
             'products' => [
-                'name' => $this->getProductName(),
-                'quantity' => $this->getQuantity(),
-                'unit_amount' => $this->getAmount() //converted to OMR,
+                [
+                    'name' => $this->getProductName(),
+                    'quantity' => $this->getQuantity(),
+                    'unit_amount' => (integer)$this->getAmount() //converted to OMR,
+                ]
             ],
             'customer_id' => $this->getCustomerId() ?? '',
             'success_url' => $this->getReturnUrl(),
             'cancel_url' => $this->getCancelUrl(),
             'save_card_on_success' => $this->getSaveCardOnSuccess() ?? false,
             'plan_id' => $this->getPlanId() ?? '',
-            'metadata' => $this->getCustomData(),
+            'metadata' => $this->getMetadata(),
         ]);
     }
 
@@ -194,7 +218,8 @@ class PurchaseRequest extends AbstractRequest
     {
         $headers = [
             'thawani-api-key' => $this->getSecretKey(),
-            'Content-Type' => 'application/json'
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json'
         ];
 
         $httpResponse = $this->httpClient->request(

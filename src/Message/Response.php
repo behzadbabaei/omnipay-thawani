@@ -107,7 +107,7 @@ class Response extends AbstractResponse implements RedirectResponseInterface
     public function getRedirectUrl(): ?string
     {
         try {
-            $paymentUrl = $this->request->getUrl() . '/pay/{session_id}?key={publishable_key}';
+            $paymentUrl = $this->request->getUrl() . 'pay/{session_id}?key={publishable_key}';
             $sessionId = $this->data['data']['session_id'];
             $publishKey = $this->request->getPublishKey();
 
@@ -155,10 +155,6 @@ class Response extends AbstractResponse implements RedirectResponseInterface
      */
     public function getCode(): ?string
     {
-        if (isset($this->data['errorId'])) {
-            return $this->data['errorId'];
-        }
-
         return null;
     }
 }
