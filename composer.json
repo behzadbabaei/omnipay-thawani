@@ -1,0 +1,40 @@
+{
+  "name": "behzadbabaei/omnipay-thawani",
+  "description": "Thawani (Oman Payment) driver for the Omnipay payment processing library",
+  "keywords": [
+    "omnipay",
+    "thawani"
+  ],
+  "homepage": "https://github.com/behzadbabaei/omnipay-thawani",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Behzad Babaei",
+      "email": "behzadbabaei69@gmail.com",
+      "homepage": "http://www.behzadbabaei.com"
+    }
+  ],
+  "require": {
+    "omnipay/common": "^3",
+    "php": "^7.2|^8",
+    "ext-json": "*"
+  },
+  "require-dev": {
+    "omnipay/tests": "^3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Omnipay\\Thawani\\": "src/"
+    }
+  },
+  "scripts": {
+    "test": "phpunit"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.0.x-dev"
+    }
+  }
+}

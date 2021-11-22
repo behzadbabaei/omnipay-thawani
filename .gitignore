@@ -1,0 +1,12 @@
+build
+/vendor
+composer.lock
+composer.phar
+phpunit.xml
+phpunit.xml.dist
+.directory
+reports/
+documents/
+.idea
+.phpunit.result.cache
+src/test.php
